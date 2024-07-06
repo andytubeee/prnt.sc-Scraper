@@ -16,8 +16,12 @@ export default function Home() {
       setErrorMsg(data.error);
       setLoading(false);
       return;
+    } else if (!data?.imageSrc) {
+      setErrorMsg('Failed to fetch image');
+      setLoading(false);
+      return;
     }
-    setImgSrc(data.imageSrc);
+    setImgSrc(data?.imageSrc ?? '');
     setLoading(false);
   };
   return (
@@ -31,7 +35,13 @@ export default function Home() {
       <div className='flex-1 flex flex-col items-center justify-center'>
         {loading && <p>Loading...</p>}
         {errorMsg && <p>{errorMsg}</p>}
-        {imgSrc && <img src={imgSrc} width={300} draggable='false' />}
+        {imgSrc && (
+          <img
+            src={imgSrc}
+            className='w-[50%] max-w-full mx-auto'
+            draggable='false'
+          />
+        )}
       </div>
     </div>
   );
