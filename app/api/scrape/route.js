@@ -29,44 +29,26 @@ const options =
             ? '/usr/bin/google-chrome'
             : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
       };
-
 export async function GET() {
-  //   console.log(options);
-  //   Launch the browser
-  const browser = await puppeteer.launch(options);
-  const page = await browser.newPage();
-
   // Replace with the URL you want to scrape
-  const url = `https://prnt.sc/${generateRoute()}`;
-  await page.goto(url);
+  let imageSrc = null;
 
-  // Get the page content
-  const content = await page.content();
+  const browser = await puppeteer.launch(options);
 
-  // Parse the content using DOMParser
-  const doc = new DOMParser().parseFromString(content, 'text/html');
+  while (!imageSrc) {
+    let url = `https://prnt.sc/${generateRoute()}`;
+    imageSrc = await scrape(browser, url);
 
-  // Define the XPath expression
-  const xpathExpression = '//*[@id="screenshot-image"]';
-
-  // Evaluate the XPath expression
-  const nodes = xpath.select(xpathExpression, doc);
-
-  // Extract the src attribute from the node(s)
-  let result = [];
-  nodes.forEach((node) => {
-    if (node.nodeName.toLowerCase() === 'img') {
-      const src = node.getAttribute('src');
-      result.push(src);
+    if (!(await isValidImageUrl(imageSrc))) {
+      imageSrc = null;
     }
-  });
+  }
 
   // Close the browser
   await browser.close();
 
-  //   Respond with the scraped data
-  return NextResponse.json({ imageSrc: result[0] });
-  //   return NextResponse.json({ test: 1 });
+  // Respond with the scraped data
+  return NextResponse.json({ imageSrc });
 }
 
 function generateRoute() {
@@ -82,4 +64,49 @@ function generateRoute() {
 
   // Combine letters and numbers
   return randomLetters + randomNumbers;
+}
+
+async function isValidImageUrl(url) {
+  try {
+    const response = await fetch(url, { method: 'HEAD' });
+    const contentType = response.headers.get('content-type');
+    return response.ok && contentType && contentType.startsWith('image/');
+  } catch (error) {
+    console.error(`Failed to fetch ${url}:`, error);
+    return false;
+  }
+}
+
+async function scrape(browser, url) {
+  const page = await browser.newPage();
+
+  await page.goto(url);
+
+  // Get the page content
+  const content = await page.content();
+
+  // Parse the content using DOMParser
+  const doc = new DOMParser().parseFromString(content, 'text/html');
+
+  // Define the XPath expression
+  const xpathExpression = '//*[@id="screenshot-image"]';
+
+  // Evaluate the XPath expression
+  const nodes = xpath.select(xpathExpression, doc);
+
+  // Extract the src attribute from the node(s)
+  let imageUrl = null;
+  if (nodes.length > 0) {
+    const node = nodes[0];
+    if (node.nodeName.toLowerCase() === 'img') {
+      const src = node.getAttribute('src');
+      if (src && (await isValidImageUrl(src))) {
+        imageUrl = src;
+      }
+    }
+  }
+
+  // Close the page
+  await page.close();
+  return imageUrl;
 }
