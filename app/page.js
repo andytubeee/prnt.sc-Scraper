@@ -38,7 +38,7 @@ export default function Home() {
         {imgSrc && (
           <img
             src={imgSrc}
-            className='w-[50%] max-w-full mx-auto'
+            className='min-w-[40vw] max-w-[70vw] mx-auto'
             draggable='false'
           />
         )}
