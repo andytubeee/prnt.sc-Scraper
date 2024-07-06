@@ -7,8 +7,10 @@ import puppeteer from 'puppeteer-core';
 const LOCAL_CHROME_EXECUTABLE =
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
+let chrome;
+
 if (process.env.AWS_REGION === '1') {
-  let chrome = require('chrome-aws-lambda');
+  chrome = require('chrome-aws-lambda');
 }
 
 const options =
