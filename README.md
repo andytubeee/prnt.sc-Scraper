@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# prnt.sc Scraper
 
-## Getting Started
+The scraper fetches a random screenshot from the prnt.sc website.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Scrapes random screenshots from prnt.sc
+- Utilizes Next.js 14's App Router for API route handling
+- Server-side web scraping with Puppeteer
+- XPath for element selection
+
+## Installation
+
+To get started, clone the repository and install the dependencies:
+
+```
+git clone https://github.com/andytubeee/prntsc-scraper.git
+cd prntsc-scraper
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Run the development server:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+`npm run dev`
 
-## Learn More
+Open your browser and navigate to `http://localhost:3000/api/scrape` to fetch a random screenshot.
 
-To learn more about Next.js, take a look at the following resources:
+## How It Works
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **Random URL Generation:** The `generateRandomString` function creates a random prnt.sc URL.
+2.  **Page Navigation:** Puppeteer navigates to the generated URL.
+3.  **Content Parsing:** The page content is parsed using `DOMParser`.
+4.  **XPath Selection:** The XPath expression selects the screenshot image element.
+5.  **Attribute Extraction:** The `src` attribute of the image is extracted and returned in the API response.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
