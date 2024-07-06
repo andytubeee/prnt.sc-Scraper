@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'prnt.sc Scraper',
-  description: "Find a stranger's screenshot on prnt.sc",
+  description: "Find strangers' screenshot on prnt.sc",
 };
 
 export default function RootLayout({ children }) {
