@@ -67,7 +67,7 @@ async function getImageSrcFromUrl(url) {
       const node = nodes[0];
       if (node.nodeName.toLowerCase() === 'img') {
         const src = node.getAttribute('src');
-        if (src && await isValidImageUrl(src)) {
+        if (src && (await isValidImageUrl(src))) {
           return src;
         }
       }
@@ -75,3 +75,4 @@ async function getImageSrcFromUrl(url) {
   }
   return null;
 }
+export const revalidate = 0;
