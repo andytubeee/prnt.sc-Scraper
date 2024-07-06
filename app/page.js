@@ -10,7 +10,7 @@ export default function Home() {
     if (imgSrc) {
       setImgSrc('');
     }
-    const res = await fetch('/api/scrape');
+    const res = await fetch('/api/scrape', { cache: 'no-store' });
     const data = await res.json();
     if (data.error) {
       setErrorMsg(data.error);
