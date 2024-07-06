@@ -76,3 +76,4 @@ async function getImageSrcFromUrl(url) {
   return null;
 }
 export const revalidate = 0;
+export const fetchCache = 'force-no-store';
