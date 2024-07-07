@@ -43,7 +43,9 @@ export default function Home() {
           />
         )}
       </div>
-      <p>Disclaimer: use this ethically for laughs only</p>
+      <p className='absolute bottom-5'>
+        <b>DISCLAIMER</b>: use this ethically for laughs only
+      </p>
     </div>
   );
 }
