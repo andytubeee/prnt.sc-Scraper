@@ -29,11 +29,7 @@ Open your browser and navigate to `http://localhost:3000/api/scrape` to fetch a 
 
 ## How It Works
 
-1.  **Random URL Generation:** The `generateRandomString` function creates a random prnt.sc URL.
-2.  **Page Navigation:** Puppeteer navigates to the generated URL.
-3.  **Content Parsing:** The page content is parsed using `DOMParser`.
-4.  **XPath Selection:** The XPath expression selects the screenshot image element.
-5.  **Attribute Extraction:** The `src` attribute of the image is extracted and returned in the API response.
+People uses prnt.sc or similar screenshot sharing platform, but the images you upload are then public, you can try scramble a path and potentially find a stranger's screenshot.
 
 ## Contributing
 
