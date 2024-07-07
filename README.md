@@ -22,7 +22,7 @@ Run the development server:
 
 `npm run dev`
 
-Open your browser and navigate to `http://localhost:3000/api/scrape` to fetch a random screenshot.
+You can also use API `http://localhost:3000/api/scrape` via a GET request.
 
 ## How It Works
 
