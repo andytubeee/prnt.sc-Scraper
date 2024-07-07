@@ -8,6 +8,9 @@ const nextConfig = {
 
     return config;
   },
+  experimental: {
+    serverComponentsExternalPackages: ['@acme/ui', 'tesseract.js'],
+  },
 };
 
 export default nextConfig;

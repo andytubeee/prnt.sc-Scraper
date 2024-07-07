@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import xpath from 'xpath';
 import { DOMParser } from 'xmldom';
 import fetch from 'node-fetch';
+import { createWorker } from 'tesseract.js';
 
 async function fetchHtml(url) {
   try {
@@ -37,9 +38,18 @@ export async function GET() {
       { status: 500 }
     );
   }
+  try {
+    const text = await extractTextFromImage(imageSrc);
 
-  // Respond with the scraped data
-  return NextResponse.json({ imageSrc });
+    // Respond with the scraped data
+    return NextResponse.json({ imageSrc, text });
+  } catch (error) {
+    console.error('Error extracting text from image:', error);
+    return NextResponse.json(
+      { error: 'Failed to extract text from image, try again.' },
+      { status: 500 }
+    );
+  }
 }
 
 function generateRoute() {
@@ -79,6 +89,20 @@ async function getImageSrcFromUrl(url) {
     }
   }
   return null;
+}
+async function extractTextFromImage(imageUrl) {
+  try {
+    const worker = await createWorker('eng', 1, {
+      workerPath: './node_modules/tesseract.js/src/worker-script/node/index.js',
+    });
+    const ret = await worker.recognize(imageUrl);
+    // console.log(ret.data.text);
+    await worker.terminate();
+    return ret?.data?.text ?? '';
+  } catch (error) {
+    console.error('Error extracting text from image:', error);
+    return '';
+  }
 }
 export const revalidate = 0;
 export const fetchCache = 'force-no-store';
