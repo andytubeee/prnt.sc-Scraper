@@ -22,10 +22,20 @@ export async function GET() {
   // Replace with the URL you want to scrape
   let url = `https://prnt.sc/${generateRoute()}`;
   let imageSrc = await getImageSrcFromUrl(url);
+  const maxAttempt = 15;
+  let attemptCount = 0;
 
-  while (!imageSrc) {
+  while (!imageSrc && attemptCount < maxAttempt) {
     url = `https://prnt.sc/${generateRoute()}`;
     imageSrc = await getImageSrcFromUrl(url);
+    attemptCount++;
+  }
+
+  if (!imageSrc) {
+    return NextResponse.json(
+      { error: 'Failed to fetch image, try again.' },
+      { status: 500 }
+    );
   }
 
   // Respond with the scraped data

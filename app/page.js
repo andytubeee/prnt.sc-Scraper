@@ -12,7 +12,7 @@ export default function Home() {
     }
     const res = await fetch('/api/scrape', { cache: 'no-store' });
     const data = await res.json();
-    if (data.error) {
+    if (data.error || res.status !== 200) {
       setErrorMsg(data.error);
       setLoading(false);
       return;
