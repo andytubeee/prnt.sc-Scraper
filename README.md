@@ -12,7 +12,7 @@ To get started, clone the repository and install the dependencies:
 
 ```
 git clone https://github.com/andytubeee/prntsc-scraper.git
-cd prntsc-scraper
+cd prnt.sc-scraper
 npm install
 ```
 
