@@ -43,6 +43,7 @@ export default function Home() {
           />
         )}
       </div>
+      <p>Disclaimer: use this ethically for laughs only</p>
     </div>
   );
 }
