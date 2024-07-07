@@ -46,7 +46,7 @@ export default function Home() {
               className='min-w-[20vw] max-w-[40vw] max-h-[60vh] mx-auto'
               draggable='false'
             />
-            <div className='my-2 w-[550px]'>
+            {/* <div className='my-2 w-[550px]'>
               <button
                 className='bg-red-500 p-3 m-3 rounded'
                 onClick={() => setShowOcr((prev) => !prev)}
@@ -58,7 +58,7 @@ export default function Home() {
                   {imgData.text || 'Failed to extract text from image.'}
                 </p>
               )}
-            </div>
+            </div> */}
           </div>
         )}
       </div>

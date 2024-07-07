@@ -39,10 +39,10 @@ export async function GET() {
     );
   }
   try {
-    const text = await extractTextFromImage(imageSrc);
+    // const text = await extractTextFromImage(imageSrc);
 
     // Respond with the scraped data
-    return NextResponse.json({ imageSrc, text });
+    return NextResponse.json({ imageSrc });
   } catch (error) {
     console.error('Error extracting text from image:', error);
     return NextResponse.json(
