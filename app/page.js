@@ -55,7 +55,6 @@ export default function Home() {
               </button>
               {showOcr && (
                 <p className='text-center'>
-                  <b>OCR: </b>
                   {imgData.text || 'Failed to extract text from image.'}
                 </p>
               )}
