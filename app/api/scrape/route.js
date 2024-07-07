@@ -22,7 +22,7 @@ export async function GET() {
   // Replace with the URL you want to scrape
   let url = `https://prnt.sc/${generateRoute()}`;
   let imageSrc = await getImageSrcFromUrl(url);
-  const maxAttempt = 15;
+  const maxAttempt = 25;
   let attemptCount = 0;
 
   while (!imageSrc && attemptCount < maxAttempt) {
