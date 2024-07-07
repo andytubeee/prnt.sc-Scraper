@@ -28,6 +28,10 @@ Open your browser and navigate to `http://localhost:3000/api/scrape` to fetch a 
 
 People uses prnt.sc or similar screenshot sharing platform, but the images you upload are then public, you can try scramble a path and potentially find a stranger's screenshot.
 
+## Disclaimer
+
+This project is made for gags only. I am not responsible for what you do with it. **SOME IMAGES MAY CONTAIN SENSITIVE INFORMATION eg. PASSWORDS, CREDIT CARD INFORMATION**
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
