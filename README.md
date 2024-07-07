@@ -1,13 +1,10 @@
 # prnt.sc Scraper
 
-The scraper fetches a random screenshot from the prnt.sc website.
+The scraper fetches a random screenshot from prnt.sc.
 
 ## Features
 
-- Scrapes random screenshots from prnt.sc
-- Utilizes Next.js 14's App Router for API route handling
-- Server-side web scraping with Puppeteer
-- XPath for element selection
+- Generates random screenshots from prnt.sc
 
 ## Installation
 
