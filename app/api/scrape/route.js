@@ -33,18 +33,13 @@ export async function GET() {
 }
 
 function generateRoute() {
-  // Generate 2 random letters
-  const letters = 'abcdefghijklmnopqrstuvwxyz';
-  const randomLetters = Array.from(
-    { length: 2 },
-    () => letters[Math.floor(Math.random() * letters.length)]
-  ).join('');
-
-  // Generate 4 random numbers
-  const randomNumbers = Math.floor(1000 + Math.random() * 9000).toString();
-
-  // Combine letters and numbers
-  return randomLetters + randomNumbers;
+  const firstCharSet = '123456789abcdefghijklmnopqrstuvwxyz';
+  const otherChars = '0123456789abcdefghijklmnopqrstuvwxyz';
+  let result = firstCharSet[Math.floor(Math.random() * firstCharSet.length)];
+  for (let i = 1; i < 6; i++) {
+    result += otherChars[Math.floor(Math.random() * otherChars.length)];
+  }
+  return result;
 }
 
 async function isValidImageUrl(url) {
